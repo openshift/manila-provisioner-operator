@@ -71,16 +71,16 @@ type ManilaProvisionerSpec struct {
 type Protocol string
 
 const (
-	ProtocolCephFS = "CEPHFS"
-	ProtocolNFS    = "NFS"
+	ProtocolCephFS Protocol = "CEPHFS"
+	ProtocolNFS    Protocol = "NFS"
 )
 
 type Backend string
 
 const (
-	BackendCephFS    = "cephfs"
-	BackendCSICephFS = "csi-cephfs"
-	BackendNFS       = "nfs"
+	BackendCephFS    Backend = "cephfs"
+	BackendCSICephFS Backend = "csi-cephfs"
+	BackendNFS       Backend = "nfs"
 )
 
 // ManilaProvisionerStatus defines the observed state of ManilaProvisioner
