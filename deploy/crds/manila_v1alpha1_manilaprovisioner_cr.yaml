@@ -1,0 +1,7 @@
+apiVersion: manila.storage.openshift.io/v1alpha1
+kind: ManilaProvisioner
+metadata:
+  name: example-manilaprovisioner
+spec:
+  # Add fields here
+  size: 3
