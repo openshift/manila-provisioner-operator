@@ -9,6 +9,64 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+const (
+	defaultImagePullSpec = "openshift/origin-manila-provisioner:latest"
+	defaultVersion       = "4.0.0"
+)
+
+// SetDefaults sets the default vaules for the external provisioner spec and returns true if the spec was changed
+func (p *ManilaProvisioner) SetDefaults() bool {
+	changed := false
+	ps := &p.Spec
+	if len(ps.ManagementState) == 0 {
+		ps.ManagementState = "Managed"
+		changed = true
+	}
+	if len(ps.ImagePullSpec) == 0 {
+		ps.ImagePullSpec = defaultImagePullSpec
+		changed = true
+	}
+	if len(ps.Version) == 0 {
+		ps.Version = defaultVersion
+		changed = true
+	}
+	if ps.ReclaimPolicy == nil {
+		reclaimPolicy := v1.PersistentVolumeReclaimDelete
+		ps.ReclaimPolicy = &reclaimPolicy
+		changed = true
+	}
+	if ps.Replicas == 0 {
+		ps.Replicas = 1
+		changed = true
+	}
+	if ps.Type == nil {
+		sType := "default"
+		ps.Type = &sType
+		changed = true
+	}
+	if ps.Zones == nil {
+		zones := []string{"nova"}
+		ps.Zones = zones
+		changed = true
+	}
+	if ps.OsSecretNamespace == nil {
+		osSecretNamespace := "default"
+		ps.OsSecretNamespace = &osSecretNamespace
+		changed = true
+	}
+	if ps.ShareSecretNamespace == nil {
+		shareSecretNamespace := *ps.OsSecretNamespace
+		ps.ShareSecretNamespace = &shareSecretNamespace
+		changed = true
+	}
+	if ps.Backend == BackendNFS && ps.Protocol == ProtocolNFS && ps.NFSShareClient == nil {
+		nfsShareClient := "0.0.0.0"
+		ps.NFSShareClient = &nfsShareClient
+		changed = true
+	}
+	return changed
+}
+
 // ManilaProvisionerSpec defines the desired state of ManilaProvisioner
 type ManilaProvisionerSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
