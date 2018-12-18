@@ -1,0 +1,12 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: manila-provisioner-operator
+  namespace: openshift-manila-provisioner-operator
+subjects:
+- kind: ServiceAccount
+  name: manila-provisioner-operator
+roleRef:
+  kind: Role
+  name: manila-provisioner-operator
+  apiGroup: rbac.authorization.k8s.io

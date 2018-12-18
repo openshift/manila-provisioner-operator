@@ -305,18 +305,16 @@
   revision = "83b2fe56301417028bd52e56edd75768e2ea051c"
 
 [[projects]]
-  branch = "master"
-  digest = "1:f9451bbd45f4dede664a43de7b2d92bf933a19f63a07f0953fcc67d56b6bf054"
+  digest = "1:e2f876718e70b70d4a93690bbe7ea75045c49981b8dda612a99122d6679b5e07"
   name = "github.com/openshift/library-go"
   packages = [
-    "pkg/operator/events",
     "pkg/operator/resource/resourceapply",
     "pkg/operator/resource/resourcemerge",
     "pkg/operator/resource/resourceread",
     "pkg/operator/v1alpha1helpers",
   ]
   pruneopts = "NUT"
-  revision = "c366f9afb353fdeece3661fc67c1ca45e30912f0"
+  revision = "85241b52707ef2beb85ad9254a176448c58ee021"
 
 [[projects]]
   digest = "1:40aa8715dac9c645acf70794d9b07c78bef1b09f22be52181544cd3da680ca17"
@@ -560,13 +558,11 @@
   revision = "2d6f90ab1293a1fb871cf149423ebb72aa7423aa"
 
 [[projects]]
-  digest = "1:5c481358219be39a06698b9bbc23ffe0f7d35ab3cfbf33a0e1d9a7528fbadf9f"
+  digest = "1:eec90201603e6ace18210cf0c4922180a0502726f26668b0a84769b6b63ebed7"
   name = "k8s.io/apiextensions-apiserver"
   packages = [
     "pkg/apis/apiextensions",
     "pkg/apis/apiextensions/v1beta1",
-    "pkg/client/clientset/clientset/scheme",
-    "pkg/client/clientset/clientset/typed/apiextensions/v1beta1",
   ]
   pruneopts = "NUT"
   revision = "408db4a50408e2149acbd657bceb2480c13cb0a4"
@@ -835,6 +831,7 @@
     "k8s.io/apimachinery/pkg/runtime/schema",
     "k8s.io/apimachinery/pkg/types",
     "k8s.io/apimachinery/pkg/util/errors",
+    "k8s.io/client-go/kubernetes",
     "k8s.io/client-go/plugin/pkg/client/auth/gcp",
     "k8s.io/code-generator/cmd/client-gen",
     "k8s.io/code-generator/cmd/conversion-gen",

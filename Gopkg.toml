@@ -58,3 +58,7 @@ required = [
 [[override]]
   name = "k8s.io/kube-aggregator"
   version = "kubernetes-1.11.2"
+
+[[override]]
+  name = "github.com/openshift/library-go"
+  revision = "85241b52707ef2beb85ad9254a176448c58ee021"

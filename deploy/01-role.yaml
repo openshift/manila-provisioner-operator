@@ -3,6 +3,7 @@ kind: Role
 metadata:
   creationTimestamp: null
   name: manila-provisioner-operator
+  namespace: openshift-manila-provisioner-operator
 rules:
 - apiGroups:
   - ""
@@ -38,3 +39,11 @@ rules:
   - '*'
   verbs:
   - '*'
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - create
+  - get
+  - update

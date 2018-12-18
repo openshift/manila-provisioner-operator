@@ -59,6 +59,11 @@ func (p *ManilaProvisioner) SetDefaults() bool {
 		ps.ShareSecretNamespace = &shareSecretNamespace
 		changed = true
 	}
+	if ps.Backend == BackendCephFS && ps.Protocol == ProtocolCephFS && ps.Mounter == nil {
+		mounter := "fuse"
+		ps.Mounter = &mounter
+		changed = true
+	}
 	if ps.Backend == BackendNFS && ps.Protocol == ProtocolNFS && ps.NFSShareClient == nil {
 		nfsShareClient := "0.0.0.0"
 		ps.NFSShareClient = &nfsShareClient
@@ -102,7 +107,7 @@ type ManilaProvisionerSpec struct {
 	Backend Backend `json:"backend"`
 
 	// Required, no default.
-	OsSecretName *string `json:"osSecretName"`
+	OsSecretName string `json:"osSecretName"`
 
 	// Optional, defaults to "default".
 	OsSecretNamespace *string `json:"osSecretNamespace,omitempty"`
@@ -121,6 +126,9 @@ type ManilaProvisionerSpec struct {
 
 	// Required for backend csi-cephfs and protocol CEPHFS, no default.
 	CSIDriver *string `json:"csiDriver,omitempty"`
+
+	// Optional for backend csi-cephfs and protocol CEPHFS, defaults to "fuse".
+	Mounter *string `json:"mounter,omitempty"`
 
 	// Optional for backend nfs and protocol NFS, defaults to "0.0.0.0".
 	NFSShareClient *string `json:"nfsShareClient,omitempty"`

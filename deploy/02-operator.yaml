@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: manila-provisioner-operator
+  namespace: openshift-manila-provisioner-operator
 spec:
   replicas: 1
   selector:
@@ -15,14 +16,13 @@ spec:
       serviceAccountName: manila-provisioner-operator
       containers:
         - name: manila-provisioner-operator
-          # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: quay.io/openshift/manila-provisioner-operator
           ports:
           - containerPort: 60000
             name: metrics
           command:
           - manila-provisioner-operator
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: WATCH_NAMESPACE
               valueFrom:

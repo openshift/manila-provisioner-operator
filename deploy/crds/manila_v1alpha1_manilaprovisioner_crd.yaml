@@ -11,3 +11,68 @@ spec:
     singular: manilaprovisioner
   scope: Namespaced
   version: v1alpha1
+  validation:
+    openAPIV3Schema:
+      properties:
+        spec:
+          properties:
+            managementState:
+              type: string
+              enum:
+                - Managed
+                - Unmanaged
+                - Removed
+            imagePullSpec:
+              type: string
+            version:
+              type: string
+            replicas:
+              type: integer
+              minimum: 1
+            storageClassName:
+              type: string
+            reclaimPolicy:
+              type: string
+              enum:
+                - Delete
+                - Retain
+            type:
+              type: string
+            zones:
+              items:
+                type: string
+              type: array
+            protocol:
+              type: string
+              enum:
+                - "CEPHFS"
+                - "NFS"
+            backend:
+              type: string
+              enum:
+                - "cephfs"
+                - "csi-cephfs"
+                - "nfs"
+            osSecretName:
+              type: string
+            osSecretNamespace:
+              type: string
+            shareSecretNamespace:
+              type: string
+            osShareID:
+              type: string
+            osShareName:
+              type: string
+            osShareAccessID:
+              type: string
+            csiDriver:
+              type: string
+            nfsShareClient:
+              type: string
+          required:
+            - storageClassName
+            - protocol
+            - backend
+            - osSecretName
+  subresources:
+    status: {}

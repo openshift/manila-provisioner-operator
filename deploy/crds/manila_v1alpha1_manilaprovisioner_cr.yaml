@@ -3,5 +3,8 @@ kind: ManilaProvisioner
 metadata:
   name: example-manilaprovisioner
 spec:
-  # Add fields here
-  size: 3
+  storageClassName: manila
+  protocol: NFS
+  backend: nfs
+  osSecretName: openstack-credentials
+  imagePullSpec: docker.io/k8scloudprovider/manila-provisioner:latest

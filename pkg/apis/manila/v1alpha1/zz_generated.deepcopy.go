@@ -106,11 +106,6 @@ func (in *ManilaProvisionerSpec) DeepCopyInto(out *ManilaProvisionerSpec) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
-	if in.OsSecretName != nil {
-		in, out := &in.OsSecretName, &out.OsSecretName
-		*out = new(string)
-		**out = **in
-	}
 	if in.OsSecretNamespace != nil {
 		in, out := &in.OsSecretNamespace, &out.OsSecretNamespace
 		*out = new(string)
@@ -138,6 +133,11 @@ func (in *ManilaProvisionerSpec) DeepCopyInto(out *ManilaProvisionerSpec) {
 	}
 	if in.CSIDriver != nil {
 		in, out := &in.CSIDriver, &out.CSIDriver
+		*out = new(string)
+		**out = **in
+	}
+	if in.Mounter != nil {
+		in, out := &in.Mounter, &out.Mounter
 		*out = new(string)
 		**out = **in
 	}
