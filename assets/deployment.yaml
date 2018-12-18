@@ -19,4 +19,4 @@ spec:
       - name: manila-provisioner
         image: docker.io/k8scloudprovider/manila-provisioner:latest
         imagePullPolicy: IfNotPresent
-        args: [ "--provisioner=manila-provisioner" ]
+        args: [ "--provisioner=openshift.io/openstack-manila" ]

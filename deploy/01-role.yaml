@@ -47,3 +47,16 @@ rules:
   - create
   - get
   - update
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  - rolebindings
+  verbs:
+  - create
+  - get
+  - update
+# ...is attempting to grant RBAC permissions not currently held
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get", "list", "watch", "create", "update", "patch"]

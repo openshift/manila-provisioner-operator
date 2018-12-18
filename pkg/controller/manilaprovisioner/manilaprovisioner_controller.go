@@ -272,6 +272,30 @@ func (r *ReconcileManilaProvisioner) syncRBAC(pr *manilav1alpha1.ManilaProvision
 		errors = append(errors, fmt.Errorf("error applying clusterRoleBinding: %v", err))
 	}
 
+	role := resourceread.ReadRoleV1OrDie(generated.MustAsset("assets/role.yaml"))
+	role.Namespace = pr.GetNamespace()
+	role.Rules[0].ResourceNames = []string{leaseName}
+	role.SetLabels(selector)
+	if err := controllerutil.SetControllerReference(pr, role, r.scheme); err != nil {
+		errors = append(errors, err)
+	}
+	_, _, err = resourceapply.ApplyRole(r.clientset.RbacV1(), role)
+	if err != nil {
+		errors = append(errors, fmt.Errorf("error applying role: %v", err))
+	}
+
+	roleBinding := resourceread.ReadRoleBindingV1OrDie(generated.MustAsset("assets/rolebinding.yaml"))
+	roleBinding.Namespace = pr.GetNamespace()
+	roleBinding.Subjects[0].Namespace = pr.GetNamespace()
+	roleBinding.SetLabels(selector)
+	if err := controllerutil.SetControllerReference(pr, roleBinding, r.scheme); err != nil {
+		errors = append(errors, err)
+	}
+	_, _, err = resourceapply.ApplyRoleBinding(r.clientset.RbacV1(), roleBinding)
+	if err != nil {
+		errors = append(errors, fmt.Errorf("error applying roleBinding: %v", err))
+	}
+
 	return errors
 }
 

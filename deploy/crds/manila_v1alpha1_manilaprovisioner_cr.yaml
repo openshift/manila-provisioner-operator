@@ -7,4 +7,4 @@ spec:
   protocol: NFS
   backend: nfs
   osSecretName: openstack-credentials
-  imagePullSpec: docker.io/k8scloudprovider/manila-provisioner:latest
+  imagePullSpec: docker.io/k8scloudprovider/manila-provisioner:v0.3.0
